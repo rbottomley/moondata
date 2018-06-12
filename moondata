@@ -10,11 +10,38 @@ $age = round( $moon->age(), 1 );
 $stage = $moon->phase() < 0.5 ? 'waxing' : 'waning';
 $phase_class = preg_replace('/ /', '-', strtolower($moon->phase_name()));
 $illumination = round($moon->illumination() * 100);
-$next = date( 'G:i T, j M Y', $moon->new_moon() );
+$new = date( 'j M', $moon->new_moon() );
+$full= date( 'j M', $moon->full_moon() );
+$first= date( 'j M', $moon->first_quarter() );
+$last= date( 'j M', $moon->last_quarter() );
+$next_new = date( 'j M', $moon->next_new_moon() );
+$next_full= date( 'j M', $moon->next_full_moon() );
+$next_first= date( 'j M', $moon->next_first_quarter() );
+$next_last= date( 'j M', $moon->next_last_quarter() );
+
+$now = time();
+
+$phases[] = array('phase' => 'new', 'time' => $moon->new_moon());
+$phases[] = array('phase' => 'first', 'time' => $moon->first_quarter());
+$phases[] = array('phase' => 'full', 'time' => $moon->full_moon());
+$phases[] = array('phase' => 'last', 'time' => $moon->last_quarter());
+$phases[] = array('phase' => 'new', 'time' => $moon->next_new_moon());
+$phases[] = array('phase' => 'first', 'time' => $moon->next_first_quarter());
+$phases[] = array('phase' => 'full', 'time' => $moon->next_full_moon());
+$phases[] = array('phase' => 'last', 'time' => $moon->next_last_quarter());
+var_dump($phases);
+
 echo <<<EOT
 The moon is currently $age days old, and is therefore $stage.
 The current phase is {$moon->phase_name()} ({$phase_class}) {$illumination}%.
-The next new moon is at $next.
+The new moon is at $new.
+The first quarter is at $first.
+The full moon is at $full.
+The last quarter is at $last.
+The next new moon is at $next_new.
+The next first quarter is at $next_first.
+The next full moon is at $next_full.
+The next last quarter is at $next_last.
 
 <svg aria-hidden="true">
     <use xlink:href="#icon-$phase_class"></use>
