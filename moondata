@@ -1,11 +1,33 @@
+#! /usr/bin/php
 <?php
+ini_set('display_errors', 1);
+date_default_timezone_set('America/Los_Angeles');
+ini_set('date.default_latitude', 33.9);
+ini_set('date.default_longitude', -117.5);
+
+$moon = new MoonPhase();
+$age = round( $moon->age(), 1 );
+$stage = $moon->phase() < 0.5 ? 'waxing' : 'waning';
+$phase_class = preg_replace('/ /', '-', strtolower($moon->phase_name()));
+$illumination = round($moon->illumination() * 100);
+$next = date( 'G:i T, j M Y', $moon->new_moon() );
+echo <<<EOT
+The moon is currently $age days old, and is therefore $stage.
+The current phase is {$moon->phase_name()} ({$phase_class}) {$illumination}%.
+The next new moon is at $next.
+
+<svg aria-hidden="true">
+    <use xlink:href="#icon-$phase_class"></use>
+</svg>
+EOT;
+
 /**
  * Moon phase calculation class
  * Adapted for PHP from Moontool for Windows (http://www.fourmilab.ch/moontoolw/)
  * by Samir Shah (http://rayofsolaris.net)
  * License: MIT
  **/
-namespace Solaris;
+//namespace Solaris;
 
 class MoonPhase {
 	private $timestamp;
@@ -336,3 +358,4 @@ class MoonPhase {
 		return $names[ floor( ( $this->phase + 0.0625 ) * 8 ) ];
 	}
 }
+
