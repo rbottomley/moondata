@@ -23,7 +23,7 @@ $phases = array(
 echo <<<EOT
 <p class="moon-phase">
     <svg aria-hidden="true">
-        <use xlink:href="#icon-$phase_class"></use>
+        <use href="#icon-$phase_class"></use>
     </svg>
     {$moon->phase_name()}<br>
     {$illumination}% illuminated
@@ -40,8 +40,8 @@ for ($i = 0, $found = 0; $found < 4; $i++) {
         echo <<<EOT
     <div>
         <svg aria-hidden="true">
-            <use xlink:href="#icon-{$class}"></use>
-        </svg>
+            <use href="#icon-{$class}"></use>
+        </svg><br>
         $date<br>
         {$phases[$i]['phase']}
     </div>
