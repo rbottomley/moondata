@@ -2,6 +2,8 @@
 
 A PHP script to output HTML giving the current phase of the moon along with the dates of upcoming phases. This block of code is meant to be used as an include template for a Wview weather site.
 
+See my [blog post](https://blog.webguy.pw/blog/adding-a-moon-data-widget-to-wview-website/) for a full description of how to use this.
+
 ## Set Up
 
 1. Edit the time zone, latitude, and longitude values for your location.
@@ -13,7 +15,8 @@ A PHP script to output HTML giving the current phase of the moon along with the 
 ```
 
 ## Sample Output
-With CSS, it displays as:
+
+With CSS and SVG icons (included), it displays as (the moon rise and set time actually comes from the Wview template):
 
 ![Moon phase screen shot](screenshot.png)
 
